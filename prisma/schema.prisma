@@ -1,0 +1,48 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model encargos {
+  id          Int       @id @default(autoincrement())
+  user_id     Int
+  producto_id Int
+  cantidad    Int       @default(1)
+  mensaje     String
+  estado      String    @default("PENDIENTE") @db.VarChar(30)
+  created_at  DateTime  @default(now()) @db.Timestamptz(6)
+  productos   productos @relation(fields: [producto_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  users       users     @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model productos {
+  id          Int        @id @default(autoincrement())
+  nombre      String     @db.VarChar(255)
+  categoria   String     @db.VarChar(100)
+  precio      Int
+  descripcion String
+  imagen      String     @db.VarChar(500)
+  state       String     @default("ACTIVE") @db.VarChar(20)
+  created_at  DateTime   @default(now()) @db.Timestamptz(6)
+  encargos    encargos[]
+}
+
+model users {
+  id         Int        @id @default(autoincrement())
+  nombre     String     @db.VarChar(100)
+  email      String     @unique @db.VarChar(150)
+  password   String     @db.VarChar(255)
+  role       user_role  @default(user)
+  status     String     @default("ACTIVE") @db.VarChar(20)
+  created_at DateTime   @default(now()) @db.Timestamptz(6)
+  encargos   encargos[]
+}
+
+enum user_role {
+  admin
+  user
+}

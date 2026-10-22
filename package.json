@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon --ext ts,json --exec 'tsx ./src/app.ts'",
     "build": "npm run prisma:generate && tsc",
-    "start": "node ./dist/app.js",
+    "start": "node ./dist/src/app.js",
     "prisma:generate": "npx prisma generate",
     "prisma:migrate": "npx prisma migrate dev",
     "seed": "tsx ./prisma/seed.ts"
