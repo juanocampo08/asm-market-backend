@@ -3,6 +3,7 @@ import {
   createEncargo,
   getAllEncargos,
   getMyEncargos,
+  updateEncargoEstado,
 } from '../controllers/encargos.controller.ts';
 import { authenticateToken, soloAdmin } from '../middlewares/auth.middleware.ts';
 
@@ -15,5 +16,6 @@ router.get('/mios', authenticateToken, getMyEncargos);
 
 // Solo administrador: ver todos los encargos de todos los usuarios
 router.get('/', authenticateToken, soloAdmin, getAllEncargos);
+router.patch('/:id/estado', authenticateToken, soloAdmin, updateEncargoEstado);
 
 export default router;

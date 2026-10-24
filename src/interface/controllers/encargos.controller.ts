@@ -47,3 +47,13 @@ export const getAllEncargos = async (_req: Request, res: Response): Promise<void
     handleError(error, res);
   }
 };
+
+export const updateEncargoEstado = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const id = Number(req.params.id);
+    const response = await useCase.updateEstado(id, req.body ?? {});
+    res.status(200).json(response);
+  } catch (error) {
+    handleError(error, res);
+  }
+};

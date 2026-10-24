@@ -60,4 +60,28 @@ export class EncargosUseCase {
     const data = await this.encargoRepository.findAll();
     return { data };
   }
+  async updateEstado(id: number, payload: Record<string, unknown>) {
+    if (!Number.isInteger(id) || id <= 0) {
+      throw new BadRequest('El ID del encargo debe ser un número entero positivo');
+    }
+
+    const estadosValidos = ['PENDIENTE', 'EN_PROCESO', 'ENTREGADO'];
+    const estado = typeof payload.estado === 'string' ? payload.estado.trim().toUpperCase() : '';
+
+    if (!estadosValidos.includes(estado)) {
+      throw new BadRequest('El estado debe ser PENDIENTE, EN_PROCESO o ENTREGADO', {
+        estado: 'Estado inválido',
+      });
+    }
+
+    const updated = await this.encargoRepository.updateEstado(id, estado);
+    if (!updated) {
+      throw new NotFoundError(`Encargo con ID ${id} no encontrado`);
+    }
+
+    return {
+      message: 'Estado del encargo actualizado exitosamente',
+      data: updated,
+    };
+  }
 }

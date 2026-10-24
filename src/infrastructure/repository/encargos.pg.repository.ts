@@ -55,6 +55,26 @@ export class EncargoPgRepository implements IEncargoRepository {
     return rows.map((row) => this.mapToDomain(row));
   }
 
+  async updateEstado(id: number, estado: string): Promise<Encargo | null> {
+    const existing = await prisma.encargos.findUnique({ where: { id } });
+    if (!existing) return null;
+
+    const updated = await prisma.encargos.update({
+      where: { id },
+      data: { estado },
+      include: {
+        users: {
+          select: { id: true, nombre: true, email: true },
+        },
+        productos: {
+          select: { id: true, nombre: true, categoria: true, precio: true, imagen: true },
+        },
+      },
+    });
+
+    return this.mapToDomain(updated);
+  }
+
   private mapToDomain(raw: {
     id: number;
     user_id: number;
