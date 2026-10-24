@@ -6,8 +6,8 @@ API RESTful desarrollada con **Node.js, Express 5, TypeScript, Prisma 7 y Postgr
 
 - **Repositorio Backend:** [https://github.com/juanocampo08/asm-market-backend](https://github.com/juanocampo08/asm-market-backend)
 - **Repositorio Frontend:** [https://github.com/juanocampo08/asm-market-frontend](https://github.com/juanocampo08/asm-market-frontend)
-- **URL de la API en producción (Render):** *(pendiente de pegar tras desplegar)*
-- **URL del Sitio Web en producción (Vercel):** *(pendiente de pegar tras desplegar)*
+- **URL de la API en producción (Render):** [https://asm-market-backend.onrender.com](https://asm-market-backend.onrender.com)
+- **URL del Sitio Web en producción (Vercel):** [https://asm-market-frontend.vercel.app](https://asm-market-frontend.vercel.app)
 
 ---
 

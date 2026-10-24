@@ -13,7 +13,8 @@ app.use(
   cors({
     origin: [
       'http://localhost:3000',
-      process.env.FRONTEND_URL || 'https://asm-market.vercel.app',
+      'https://asm-market-frontend.vercel.app',
+      (process.env.FRONTEND_URL || 'https://asm-market-frontend.vercel.app').replace(/\/$/, ''),
     ],
   })
 );
